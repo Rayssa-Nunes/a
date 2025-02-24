@@ -47,6 +47,8 @@ services:
       replicas: 5
       placement:
         constraints: [ node.role == worker ]
+    environment:
+      - NODE_NAME=${HOSTNAME}
 
   visualizer:
     image: dockersamples/visualizer:stable
