@@ -3,6 +3,7 @@ import pysolr
 from sync_postgres_solr import dados_postgres, carregar_solr
 from helpers.enviroment import URL_SOLR
 import socket
+import os
 
 app = Flask(__name__)
 
@@ -23,7 +24,8 @@ def index_data():
 @app.route('/')
 def index():
     container_id, _, hostname = socket.gethostbyaddr(socket.gethostname())
-    return render_template(index_template, container_id=container_id, hostname=hostname)
+    node_name = os.getenv('NODE_NAME', 'Desconhecido')
+    return render_template(index_template, container_id=container_id, hostname=hostname, node_name=node_name)
 
 @app.route('/search', methods=['GET'])
 def search():
