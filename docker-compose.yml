@@ -48,7 +48,8 @@ services:
       placement:
         constraints: [ node.role == worker ]
     environment:
-      - NODE_NAME=${HOSTNAME}
+      - NODE_NAME={{.Node.Hostname}}
+      #- NODE_NAME=${HOSTNAME}
 
   visualizer:
     image: dockersamples/visualizer:stable
